@@ -8,10 +8,23 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Party Events!</h1>
+    <h1 id="headers">Party Events!</h1>
     <section>
         <ul id="events">
         </ul>
+    </section>
+    <section>
+        <form id="addParty">
+            <p>Party Name:</p>
+            <input type="text" name="name" required="required" />
+            <p>Party Date:</p>
+            <input type="date" name="date" required="required" />
+            <p>Party Location:</p>
+            <input type="text" name="location" required="required" />
+            <p>Party Description:</p>
+            <input type="text" name="description" required="required" />
+            <button id="form-submit">Add Party!</button>
+        </form>
     </section>
 </body>
 </html>
