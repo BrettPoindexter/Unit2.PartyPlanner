@@ -1,0 +1,16 @@
+form {
+    max-width: 10%;
+}
+
+input {
+    height: 2rem;
+}
+
+#form-submit {
+    margin-top: 20px;
+}
+
+#headers {
+    text-align: center;
+    font-size: 50px;
+}
