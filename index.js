@@ -17,6 +17,7 @@ async function getEvent() {
         const response = await fetch(API_URL);
         const json = await response.json();
         state.events = json.data;
+        console.log(state)
     } catch (error) {
         console.error(error);
     }
@@ -47,38 +48,52 @@ function renderEvent() {
 
 async function addEvent(event) {
     event.preventDefault();
-
-    const id = 888;
+    const id = 7826;
     
     try {
         const response = await fetch(API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                cohortID: 70,
-                id: id,
-                name: addPartyForm.name.value,
+                cohortId: 70,
+                date: new Date(addPartyForm.date.value),
                 description: addPartyForm.description.value,
-                date: addPartyForm.date.value,
+                id: id,
                 location: addPartyForm.location.value,
+                name: addPartyForm.name.value,
             }),
         });
+        render();
         
         if (!response.ok) {
             throw new Error(`Failed to create Event. Status: ${response.status}`);
         };
-
-        //const newEvent = await response.json();
-        renderEvent();
     } catch (error) {
         console.error(error);
     }
+
 };
 
 
-function deleteEvent(event) {
+async function deleteEvent(event) {
     event.preventDefault();
 
     const target = event.target.id;
     
+    try {
+        const response = await fetch(API_URL + `/${target}`, {
+            method: 'DELETE',
+        });
+    render();
+
+        if (response.ok){
+            state.events = state.events.filter((i) => i.id !== target);
+        } else {
+            throw new Error('Failed to Delete Event');
+        }
+    
+    } catch (error) {
+        console.error(error);
+    }
 }
+
